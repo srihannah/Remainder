@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interview Information</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    
+
+    <div class="user-info">
+        <h3>Welcome, {{ user.username }}</h3>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
+    </div>
+    
+    
+    
+    
+    
+    <h1>IT AND NON-IT JOBS</h1>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    <p><a href="{% url 'add_user' %}">ADD INFORMATION</a></p>
+    <table>
+        <tr>
+            <th>No</th>
+            <th>Company</th>
+            <th>Role</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Address</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for data in datas %}
+        <tr>
+            <td>{{ data.ROLL_NUM }}</td>
+            <td>{{ data.Company_Name }}</td>
+            <td>{{ data.Job_Role }}</td>
+            <td>{{ data.DateofInterview }}</td>
+            <td>{{ data.TimeofInterview }}</td>
+            <td>{{ data.Address }}</td>
+            <td><a href="{% url 'update_user' data.ROLL_NUM|default:0 %}">Edit</a></td>
+            <td><a href="{% url 'delete_user' data.ROLL_NUM %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

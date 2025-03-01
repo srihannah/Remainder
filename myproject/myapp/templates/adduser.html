@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Information - Add User</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Add User</h1>
+    
+    <!-- Display Flash Messages -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Form for Adding User -->
+    <form action="{% url 'add_user' %}" method="POST">
+        {% csrf_token %}
+        
+        <label>Company Name</label>
+        <input type="text" name="Company_Name" required>
+        
+        <label>Job Role</label>
+        <input type="text" name="Job_Role" required>
+        
+        <label>Date</label>
+        <input type="date" name="DateofInterview" required>
+        
+        <label>Time</label>
+        <input type="time" name="TimeofInterview" required>
+        
+        <label>Address</label>
+        <input type="text" name="Address" required>
+        
+        <input type="submit" value="Save">
+    </form>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>

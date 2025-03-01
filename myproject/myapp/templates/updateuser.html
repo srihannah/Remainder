@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Interview Information</title>
+    {% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Update User</h1>
+
+    <!-- Display Flash Messages -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Form for Updating User -->
+    <form action="{% url 'update_user' data.ROLL_NUM|default:0 %}" method="POST">
+        {% csrf_token %}
+        
+        <label>Company Name</label>
+        <input type="text" name="Company_Name" value="{{ data.Company_Name }}" required>
+
+        <label>Job Role</label>
+        <input type="text" name="Job_Role" value="{{ data.Job_Role }}" required>
+
+        <label>Date</label>
+        <input type="date" name="DateofInterview" value="{{ data.DateofInterview }}" required>
+
+        <label>Time</label>
+        <input type="time" name="TimeofInterview" value="{{ data.TimeofInterview }}" required>
+
+        <label>Address</label>
+        <input type="text" name="Address" value="{{ data.Address }}" required>
+
+        <input type="submit" value="Update">
+    </form>
+
+    <p><a href="{% url 'home' %}">Back to Home</a></p>
+</body>
+</html>
